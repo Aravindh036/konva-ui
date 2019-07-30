@@ -28,7 +28,7 @@ class App extends Component {
   }
   right = () => {
     var canvas = this.state.canvas;
-    if ((this.state.canvas <= this.state.length)) {
+    if ((this.state.canvas < this.state.length - 1)) {
       this.setState({
         canvas: canvas + 1
       });
