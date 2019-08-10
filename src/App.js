@@ -20,7 +20,7 @@ class App extends Component {
   }
   left = () => {
     var canvas = this.state.canvas;
-    if (((this.state.canvas >= 0))) {
+    if (((this.state.canvas > 0))) {
       this.setState({
         canvas: canvas - 1
       });
@@ -39,7 +39,9 @@ class App extends Component {
     return (
       <div className="App">
         <div className="icons left-icon" onClick={this.left} >&#60;</div>
-        {this.state.full_canvas[this.state.canvas]}
+        <div className="canvas-display">
+          {this.state.full_canvas[this.state.canvas]}
+        </div>
         <div className="icons right-icon" onClick={this.right} >&#62;</div>
       </div>
     )

@@ -13,6 +13,10 @@ function parseJson(json) {
     return [result,j];
 }
 
+const myfun = (e)=>{
+    console.log(e);
+}
+
 const label = {
     'artboard': function (json) {
         var layersArray = [];
@@ -20,7 +24,7 @@ const label = {
             layersArray.push(label[layers.tag](layers));
         }
 
-        return <Stage key={json.frame.id} height={json.frame.height} width={json.frame.width} >
+        return <Stage key={json.frame.id} height={json.frame.height} width={json.frame.width} scal >
             <Layer key={json.frame.id} >
                 {layersArray}
             </Layer>
@@ -65,7 +69,7 @@ const label = {
             obj['stroke'] = getColor(json.style.border[index].color.value);
         }
         console.log("json::", json.name, json);
-        return <Rect {...obj} />;
+        return <Rect {...obj} draggable/>;
     },
     'circle': function (json) {
         var obj = {

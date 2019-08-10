@@ -4,21 +4,27 @@
     align-items: center;
     height: 100vh;
     overflow: hidden;
-
 }
+
 
 canvas{
     position: relative!important;
     border-radius: 11px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.226);
-    transform: scale(0.6);
 }
 
 .icons{
     font-size: 100px;
     cursor: pointer;
-    color: rgba(0, 0, 0, 0.771);
+    color: rgba(0, 0, 0, 0.671);
     z-index: 100;
+    transition: all 0.3s ease;
+}
+
+.icons:hover{
+    color: rgba(0, 0, 0, 0.771);
+    transform: scale(1.05);
+    text-shadow: 0 4px 10px rgba(0, 0, 0, 0.192);
 }
 
 .left-icon{
