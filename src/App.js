@@ -24,7 +24,7 @@ class App extends Component {
     full_canvas: [{ layer: null, data: { width: null, height: null } }]
   }
   componentDidMount() {
-    console.log("in component did mount");
+    // console.log("in component did mount");
     assignJSON(json);
     const [canvas, length] = this.parseJson(json);
     // console.log(length);
@@ -70,7 +70,7 @@ class App extends Component {
   }
 
   setSelected = (value) => {
-    console.log(value);
+    // console.log(value);
     this.setState({
       selected: value
     });
@@ -80,7 +80,7 @@ class App extends Component {
   handleWheel = e => {
     e.evt.preventDefault();
     // console.log(this.state.full_canvas)
-    const scaleBy = 1.05;
+    const scaleBy = 1.1;
     const stage = e.target.getStage();
     const oldScale = stage.scaleX();
     const mousePointTo = {
@@ -88,7 +88,7 @@ class App extends Component {
       y: stage.getPointerPosition().y / oldScale - stage.y() / oldScale
     };
 
-    const newScale = e.evt.deltaY > 0 ? oldScale * scaleBy : oldScale / scaleBy;
+    const newScale = e.evt.deltaY < 0 ? oldScale * scaleBy : oldScale / scaleBy;
 
     stage.scale({ x: newScale, y: newScale });
     this.setState({
@@ -116,7 +116,7 @@ class App extends Component {
 
   componentDidUpdate() {
     if ((update === true)) {
-      console.log("update");
+      // console.log("update");
       const [canvas, length] = this.parseJson(json);
       // console.log(length);
       this.setState({
@@ -141,8 +141,8 @@ class App extends Component {
     'group': (json) => {
       var layersArray = [];
       for (var layers of json.layers) {
-        layersArray.push(this.label[layers.tag](layers));
         // console.log("in groupp", layers.tag);
+        layersArray.push(this.label[layers.tag](layers));
       }
       layersArray = <Group
         key={json.id}
@@ -162,6 +162,14 @@ class App extends Component {
         json={json} />
     },
     'circle': (json) => {
+      return <CustomCircle
+        isSelected={json.id === this.state.selected}
+        onSelect={() => {
+          this.setSelected(json.id);
+        }}
+        json={json} />
+    },
+    'ellipse': (json) => {
       return <CustomCircle
         isSelected={json.id === this.state.selected}
         onSelect={() => {

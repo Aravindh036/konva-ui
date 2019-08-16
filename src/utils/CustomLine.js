@@ -7,10 +7,10 @@ const CustomLine = ({ isSelected, onSelect, json }) => {
     const shapeRef = React.useRef();
     const trRef = React.useRef();
     React.useEffect(() => {
-        console.log("rect", isSelected);
+        // console.log("rect", isSelected);
         if (isSelected) {
             // we need to attach transformer manually
-            console.log(trRef);
+            // console.log(trRef);
             trRef.current.setNode(shapeRef.current);
             trRef.current.getLayer().batchDraw();
         }
@@ -32,7 +32,7 @@ const CustomLine = ({ isSelected, onSelect, json }) => {
         ComponentKey: json.id,
         key: json.id,
         x: x,
-        y: y,
+        y: y-5,
         rotation: Math.abs(json.frame.rotation),
         points: [json.frame.x1, json.frame.y1, json.frame.x2, json.frame.y2,]
     }
@@ -51,7 +51,7 @@ const CustomLine = ({ isSelected, onSelect, json }) => {
                     console.log(json);
                 }}
                 onClick={(e) => {
-                    onselect();
+                    onSelect();
                     console.log(json.tag, 'selected');
                 }} />
             {isSelected && <Transformer ref={trRef} />}
